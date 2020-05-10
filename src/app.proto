@@ -1,0 +1,98 @@
+syntax = 'proto3';
+import "google/protobuf/empty.proto";
+package app_user;
+
+service UserController {
+    rpc UserQueryAll (UserQueryDTO) returns (Users);
+    rpc UserQueryById (UserIdDTO) returns (User);
+    rpc UserCreate (UserCreateDTO) returns (UserId);
+    rpc UserVerify (UserIdCodeDTO) returns (UserId);
+    rpc UserUpdate (UserUpdateDTO) returns (UserId);
+    rpc UserArchive (UserIdDTO) returns (UserId);
+    rpc UserResetPassword (UserEmailDTO) returns (UserEmailPassword);
+    rpc UserGenerateCode (UserIdDTO) returns (UserId);
+    rpc DeleteArchives (google.protobuf.Empty) returns (UserIds);
+}
+
+message UserQueryDTO {
+    double take = 1;
+    double skip = 2;
+    string orderBy = 3;
+    string order = 4;
+    string start = 5;
+    string end = 6;
+    string q = 7;
+    string v = 8;
+}
+
+message UserCreateDTO {
+    string name = 1;
+    string email = 2;
+    string phone = 3;
+    string dob = 4;
+    string address = 5;
+    double longitude = 6;
+    double latitude = 7;
+    string password = 8;
+}
+
+message UserUpdateDTO {
+    string id = 1;
+    UserCreateDTO newUser = 2;
+}
+
+message UserIdDTO {
+    string id = 1;
+}
+
+message UserEmailDTO {
+    string email = 1;
+}
+
+message UserIdCodeDTO {
+    string id = 1;
+    string code = 2;
+}
+
+message UserEmailPasswordDTO {
+    string email = 1;
+    string newPassword = 2;
+}
+
+message UserEntity {
+    string id = 1;
+    string publicId = 2;
+    double status = 3;
+    double role = 4;
+    string name = 5;
+    string email = 6;
+    string phone = 7;
+    string dob = 8;
+    string address = 9;
+    double longitude = 10;
+    double latitude = 11;
+    string created = 12;
+    string updated = 13;
+    double archived = 14;
+    string code = 15;
+}
+
+message Users {
+    repeated UserEntity data = 1;
+}
+
+message User {
+    User data = 1;
+}
+
+message UserId {
+    string data = 1;
+}
+
+message UserIds {
+    repeated string data = 1;
+}
+
+message UserEmailPassword {
+    UserEmailPasswordDTO data = 1;
+}
