@@ -6,7 +6,7 @@ import { UserCreate }  from './dtos/user.create.dto'
 import { UserUpdate }  from './dtos/user.update.dto'
 import { UserQuery }   from './dtos/user.query.dto'
 
-@Controller('user')
+@Controller()
 export class UserController {
 	constructor (private readonly service: UserService) {
 	}
